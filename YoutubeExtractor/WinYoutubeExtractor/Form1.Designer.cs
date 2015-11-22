@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.UrlTextBox = new System.Windows.Forms.TextBox();
             this.DownloadButton = new System.Windows.Forms.Button();
             this.OutputTextBox = new System.Windows.Forms.TextBox();
@@ -42,7 +43,7 @@
             this.UrlTextBox.Name = "UrlTextBox";
             this.UrlTextBox.Size = new System.Drawing.Size(528, 20);
             this.UrlTextBox.TabIndex = 0;
-            this.UrlTextBox.Text = "https://www.youtube.com/watch?v=_9gZ9x0cgQA";
+            this.UrlTextBox.Click += new System.EventHandler(this.UrlTextBox_Click);
             // 
             // DownloadButton
             // 
@@ -82,6 +83,7 @@
             this.Controls.Add(this.OutputTextBox);
             this.Controls.Add(this.DownloadButton);
             this.Controls.Add(this.UrlTextBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "YouTube Downloader";
             this.ResumeLayout(false);

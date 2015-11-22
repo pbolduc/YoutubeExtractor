@@ -38,33 +38,35 @@ namespace WinYoutubeExtractor
 
             OutputTextBox.Text = string.Join(Environment.NewLine, videos.Select(FormatVideoInfo).ToArray());
 
-            if (true)
+            var video = videos.FirstOrDefault();
+            if (video == null)
             {
-                var video = videos.First();
-                if (video.RequiresDecryption)
-                {
-                    DownloadUrlResolver.DecryptDownloadUrl(video);
-                }
-
-                /*
-                 * Create the video downloader.
-                 * The first argument is the video to download.
-                 * The second argument is the path to save the video file.
-                 */
-                var videoDownloader = new VideoDownloader(video,
-                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
-                    RemoveIllegalPathCharacters(video.Title) + video.VideoExtension));
-
-                // Register the ProgressChanged event and print the current progress
-                videoDownloader.DownloadProgressChanged += VideoDownloaderOnDownloadProgressChanged;
-
-                /*
-                 * Execute the video downloader.
-                 * For GUI applications note, that this method runs synchronously.
-                 */
-                await videoDownloader.ExecuteAsync();
+                MessageBox.Show("Cannot find a valid 720p mp4 video. Has the advertisement completed?", "Download Failed", MessageBoxButtons.OK);
+                return;
             }
 
+            if (video.RequiresDecryption)
+            {
+                DownloadUrlResolver.DecryptDownloadUrl(video);
+            }
+
+            /*
+             * Create the video downloader.
+             * The first argument is the video to download.
+             * The second argument is the path to save the video file.
+             */
+            var videoDownloader = new VideoDownloader(video,
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos),
+                RemoveIllegalPathCharacters(video.Title) + video.VideoExtension));
+
+            // Register the ProgressChanged event and print the current progress
+            videoDownloader.DownloadProgressChanged += VideoDownloaderOnDownloadProgressChanged;
+
+            /*
+             * Execute the video downloader.
+             * For GUI applications note, that this method runs synchronously.
+             */
+            await videoDownloader.ExecuteAsync();
         }
 
         private void VideoDownloaderOnDownloadProgressChanged(object sender, ProgressEventArgs progressEventArgs)
@@ -90,6 +92,11 @@ namespace WinYoutubeExtractor
             string regexSearch = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
             var r = new Regex(string.Format("[{0}]", Regex.Escape(regexSearch)));
             return r.Replace(path, "");
+        }
+
+        private void UrlTextBox_Click(object sender, EventArgs e)
+        {
+            UrlTextBox.SelectAll();
         }
     }
 }
