@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YoutubeExtractor", "YoutubeExtractor\YoutubeExtractor.csproj", "{ECDC127F-8DEF-4F99-8300-72C13597339D}"
 EndProject
@@ -20,6 +20,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleApplication.Portable
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YoutubeExtractor.Tests", "YoutubeExtractor.Tests\YoutubeExtractor.Tests.csproj", "{CE76B74C-BD0C-4768-8F8B-78E0FBD46FBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YoutubeDownloader", "YoutubeDownloader\YoutubeDownloader.csproj", "{0713C3AF-B861-4EDA-9250-397220019E07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinYoutubeExtractor", "WinYoutubeExtractor\WinYoutubeExtractor.csproj", "{D604F288-1FB4-4B44-97E3-ACCBCBB922E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +52,14 @@ Global
 		{CE76B74C-BD0C-4768-8F8B-78E0FBD46FBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE76B74C-BD0C-4768-8F8B-78E0FBD46FBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE76B74C-BD0C-4768-8F8B-78E0FBD46FBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0713C3AF-B861-4EDA-9250-397220019E07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0713C3AF-B861-4EDA-9250-397220019E07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0713C3AF-B861-4EDA-9250-397220019E07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0713C3AF-B861-4EDA-9250-397220019E07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D604F288-1FB4-4B44-97E3-ACCBCBB922E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D604F288-1FB4-4B44-97E3-ACCBCBB922E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D604F288-1FB4-4B44-97E3-ACCBCBB922E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D604F288-1FB4-4B44-97E3-ACCBCBB922E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

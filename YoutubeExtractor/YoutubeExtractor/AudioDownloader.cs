@@ -25,6 +25,8 @@ using System.Net;
 
 namespace YoutubeExtractor
 {
+    using System.Threading.Tasks;
+
     /// <summary>
     /// Provides a method to download a video and extract its audio track.
     /// </summary>
@@ -75,6 +77,11 @@ namespace YoutubeExtractor
             }
 
             this.OnDownloadFinished(EventArgs.Empty);
+        }
+
+        public override async Task ExecuteAsync()
+        {
+            throw new NotImplementedException();
         }
 
         private void DownloadVideo(string path)

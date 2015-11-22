@@ -2,6 +2,8 @@
 
 namespace YoutubeExtractor
 {
+    using System.Threading.Tasks;
+
     /// <summary>
     /// Provides the base class for the <see cref="AudioDownloader"/> and <see cref="VideoDownloader"/> class.
     /// </summary>
@@ -57,19 +59,23 @@ namespace YoutubeExtractor
         /// </summary>
         public abstract void Execute();
 
+        public abstract Task ExecuteAsync();
+
         protected void OnDownloadFinished(EventArgs e)
         {
-            if (this.DownloadFinished != null)
+            var handler = DownloadFinished;
+            if (handler != null)
             {
-                this.DownloadFinished(this, e);
+                handler(this, e);
             }
         }
 
         protected void OnDownloadStarted(EventArgs e)
         {
-            if (this.DownloadStarted != null)
+            var handler = this.DownloadStarted;
+            if (handler != null)
             {
-                this.DownloadStarted(this, e);
+                handler(this, e);
             }
         }
     }

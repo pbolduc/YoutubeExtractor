@@ -7,6 +7,9 @@ using Newtonsoft.Json.Linq;
 
 namespace YoutubeExtractor
 {
+    using System.Threading;
+    using System.Threading.Tasks;
+
     /// <summary>
     /// Provides a method to get the download link of a YouTube video.
     /// </summary>
@@ -120,6 +123,21 @@ namespace YoutubeExtractor
             }
 
             return null; // Will never happen, but the compiler requires it
+        }
+
+        public static async Task<IEnumerable<VideoInfo>> GetDownloadUrlsAsync(string videoUrl, CancellationToken cancellationToken, bool decryptSignature = true)
+        {
+            if (videoUrl == null)
+                throw new ArgumentNullException("videoUrl");
+
+            bool isYoutubeUrl = TryNormalizeYoutubeUrl(videoUrl, out videoUrl);
+
+            if (!isYoutubeUrl)
+            {
+                throw new ArgumentException("URL is not a valid youtube URL!");
+            }
+
+            return Enumerable.Empty<VideoInfo>();
         }
 
 #if PORTABLE
@@ -303,6 +321,23 @@ namespace YoutubeExtractor
 
         private static JObject LoadJson(string url)
         {
+            string pageSource = HttpHelper.DownloadString(url);
+
+            if (IsVideoUnavailable(pageSource))
+            {
+                throw new VideoNotAvailableException();
+            }
+
+            var dataRegex = new Regex(@"ytplayer\.config\s*=\s*(\{.+?\});", RegexOptions.Multiline);
+
+            string extractedJson = dataRegex.Match(pageSource).Result("$1");
+
+            return JObject.Parse(extractedJson);
+        }
+
+        private static async Task<JObject> LoadJsonAsync(string url)
+        {
+            //HttpClient  
             string pageSource = HttpHelper.DownloadString(url);
 
             if (IsVideoUnavailable(pageSource))
